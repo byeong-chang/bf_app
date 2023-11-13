@@ -1,6 +1,6 @@
 // example fetch
 // 자신의 컴퓨터 ip주소 넣기
-const myLocalIp = "172.21.80.163";
+const myLocalIp = "";
 
 const signTest = async (data) => {
   const result = await fetch(`http://${myLocalIp}:8080/sign_up`, {
