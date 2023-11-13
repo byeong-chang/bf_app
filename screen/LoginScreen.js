@@ -4,7 +4,8 @@ import uuid from "react-native-uuid";
 import React, { useEffect, useRef, useState } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import * as Update from "expo-updates";
-export default function Login() {
+import api_get from "../api/api_get";
+export default function Login({ navigation }) {
   const [id, setId] = useState("");
 
   const storeData = async (value) => {
@@ -32,11 +33,16 @@ export default function Login() {
     }
   };
   const handleClcik = async () => {
+    const test = await api_get.fetchTest();
+    if (test) {
+      console.log("---> test1 success");
+    }
     if (id == "") {
-      storeData(uuid.v4());
+      await storeData(uuid.v4());
     }
     console.log("---> Device ID : " + id);
   };
+
   return (
     <View style={styles.container}>
       <Text>소프트웨어 공학 10조</Text>
@@ -45,6 +51,10 @@ export default function Login() {
       </Text>
       <Button title="Check your ID" onPress={handleClcik}></Button>
       <Button title="logout" onPress={logout}></Button>
+      <Button
+        title="Go Root"
+        onPress={() => navigation.navigate("Root", { id })}
+      ></Button>
       <StatusBar style="auto" />
     </View>
   );
