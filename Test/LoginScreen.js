@@ -23,6 +23,7 @@ export default function Login({ navigation }) {
     };
     getData();
   }, []);
+
   const logout = async () => {
     console.log("logout id : " + id);
     try {
@@ -32,11 +33,9 @@ export default function Login({ navigation }) {
       console.log(error);
     }
   };
+
   const handleClcik = async () => {
-    const test = await api_get.fetchTest();
-    if (test) {
-      console.log("---> test1 success");
-    }
+    await api_get.fetchTest();
     if (id == "") {
       await storeData(uuid.v4());
     }
@@ -64,12 +63,12 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#fff",
     alignItems: "center",
-    justifyContent: "center",
+    justifyContent: "center"
   },
   id: {
     fontSize: 16,
     fontWeight: "bold",
     color: "blue",
-    paddingBottom: 20,
-  },
+    paddingBottom: 20
+  }
 });

@@ -1,16 +1,16 @@
-// example fetch
-// 자신의 컴퓨터 ip주소 넣기
-const myLocalIp = "";
+import myLocalIp from "./api_ip";
 
-const fetchTest = async () => {
-  const result = await fetch(`http://${myLocalIp}:8080/test`, {
+const tokenLogin = async (token) => {
+  const result = await fetch(`http://${myLocalIp}:8080/Acess/${token}`, {
     method: "GET"
   })
     .then((res) => res.json())
-    .catch((error) => console.log("error is --->" + error));
+    .catch((error) => {
+      console.log("error is --->" + error);
+    });
   return result;
 };
 
-const api_get = { fetchTest };
+const api_get = { tokenLogin };
 
 export default api_get;
