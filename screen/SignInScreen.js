@@ -27,7 +27,8 @@ export default function SingIn({ navigation }) {
         const user = await api_get.tokenLogin(value);
         if (user.username) {
           console.log("해당기기 토큰 사용자가 있어 자동로그인 됩니다.");
-          navigation.replace("Main", { value, user });
+          // navigation.replace("Main", { value, user });
+          navigation.navigate("MainTab", { value, user });
         } else {
           console.log("error is ---> : " + user.message);
         }
