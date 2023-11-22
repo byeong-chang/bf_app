@@ -15,9 +15,7 @@ const MainScreen = ({ route, navigation }) => {
     } catch (error) {
       console.log(error);
     }
-    // navigation.navigate("Login");
   };
-
   return (
     <View>
       <Text

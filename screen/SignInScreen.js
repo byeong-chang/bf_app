@@ -43,6 +43,7 @@ export default function SingIn({ navigation }) {
     // console.log("---> id: " + inputId);
     // console.log("---> pw: " + inputPw);
     console.log("---> token: " + token);
+    const value = token;
     const data = {
       userId: inputId,
       passwd: inputPw,
@@ -55,7 +56,7 @@ export default function SingIn({ navigation }) {
       alert("해당 사용자가 없습니다. 회원가입을 해주세요.");
       return;
     }
-    navigation.replace("Main", { token, user });
+    navigation.navigate("MainTab", { value, user });
   };
 
   const signUpHandle = async () => {

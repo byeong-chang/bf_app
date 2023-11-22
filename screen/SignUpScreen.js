@@ -62,6 +62,7 @@ export default function SingUp({ navigation, route }) {
         disabledValidate,
         token
       };
+      // console.log("---> data : " + JSON.stringify(data));
       const res = await api_post.signUp(data);
       console.log(res);
       navigation.pop();
