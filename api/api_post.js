@@ -25,9 +25,24 @@ const signUp = async (data) => {
     .catch((error) => console.log("---> error : " + error));
   return userDTO;
 };
+
+const recommendLocation = async (data) => {
+  const location = await fetch(`http://${myLocalIp}:8080/Location`, {
+    method: "POST",
+    headers: {
+      "content-type": "application/json"
+    },
+    body: JSON.stringify(data)
+  })
+    .then((res) => res.json())
+    .catch((error) => console.log("---> error : " + error));
+  return location;
+};
+
 const api_post = {
   login,
-  signUp
+  signUp,
+  recommendLocation
 };
 
 export default api_post;

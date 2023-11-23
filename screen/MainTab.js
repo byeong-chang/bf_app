@@ -1,7 +1,7 @@
 import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import MainScreen from "../Test/Main";
 import RecruitScreen from "./RecruitmentScreen";
+import MainScreen from "./MainScreen";
 
 const Tab = createBottomTabNavigator();
 
@@ -28,11 +28,12 @@ export default function MainTab({ route }) {
         component={MainScreen}
         initialParams={{ user: user, token: token }}
         options={{
-          title: "메인",
+          title: "BF Searcher",
           // headerTitleAlign: 'flex-start',
           headerStyle: {
             borderBottomColor: "black",
-            borderBottomWidth: 1
+            borderBottomWidth: 1,
+            backgroundColor: "steelblue"
           }
         }}
       />
