@@ -8,7 +8,8 @@ import {
   FlatList,
   SafeAreaView,
   StyleSheet,
-  ScrollView
+  ScrollView,
+  ActivityIndicator
 } from "react-native";
 import * as Update from "expo-updates";
 import * as Location from "expo-location";
@@ -27,6 +28,7 @@ const MainScreen = ({ route, navigation }) => {
   const [randomLocationData, setLandomLD] = useState({});
   const [distanceLocationData, setDistanceLD] = useState({});
   const [reviewLocationData, setReviewLD] = useState({});
+  const [loading, setLoading] = useState(false);
 
   console.log("user token is ----> : " + token);
 
@@ -44,6 +46,7 @@ const MainScreen = ({ route, navigation }) => {
         setLandomLD(locations.slice(0, 2));
         setDistanceLD(locations.slice(2, 4));
         setReviewLD(locations.slice(4));
+        setLoading(true);
       } catch (e) {
         console.log(e);
       }
@@ -53,6 +56,7 @@ const MainScreen = ({ route, navigation }) => {
   };
   useEffect(() => {
     getLocation();
+    setLoading(false);
   }, [route, navigation]);
 
   const handleLogout = async () => {
@@ -64,6 +68,18 @@ const MainScreen = ({ route, navigation }) => {
   };
 
   const renderLocation = (location) => {
+    const handleLocationDetail = async () => {
+      navigation.navigate("LocationDetail", {
+        user: userInfo,
+        location: location.item
+      });
+    };
+    // console.log(
+    //   "user -> : " + userLocation.latitude + ", " + userLocation.longitude
+    // );
+    // console.log(
+    //   "location -> : " + location.item.latitude + ", " + location.item.longitude
+    // );
     return (
       <View
         style={{
@@ -72,7 +88,7 @@ const MainScreen = ({ route, navigation }) => {
           margin: 15,
           padding: 10,
           // 범위 살펴보기 위해 설정, 최종시 삭제
-          borderWidth: 2
+          borderWidth: 1
         }}
       >
         <Text style={{ fontSize: 16, fontWeight: "bold" }}>
@@ -81,7 +97,7 @@ const MainScreen = ({ route, navigation }) => {
         <Button
           title="자세히 보기"
           borderWidth="3"
-          onPress={() => alert(JSON.stringify(location.item))}
+          onPress={handleLocationDetail}
         ></Button>
       </View>
     );
@@ -128,56 +144,60 @@ const MainScreen = ({ route, navigation }) => {
           </View>
 
           {/* recommend location view */}
-          <View style={{ padding: 10 }}>
-            <View
-              style={{
-                alignItems: "center",
-                backgroundColor: "mistyrose",
-                borderRadius: 50,
-                margin: 2
-              }}
-            >
-              <Text style={styles.recommendTitle}>랜덤추천</Text>
-              <FlatList
-                data={randomLocationData}
-                renderItem={renderLocation}
-                keyExtractor={() => uuid.v4()}
-                scrollEnabled={false}
-              />
+          {loading ? (
+            <View style={{ padding: 10 }}>
+              <View
+                style={{
+                  alignItems: "center",
+                  backgroundColor: "mistyrose",
+                  borderRadius: 50,
+                  margin: 2
+                }}
+              >
+                <Text style={styles.recommendTitle}>랜덤추천</Text>
+                <FlatList
+                  data={randomLocationData}
+                  renderItem={renderLocation}
+                  keyExtractor={() => uuid.v4()}
+                  scrollEnabled={false}
+                />
+              </View>
+              <View
+                style={{
+                  alignItems: "center",
+                  backgroundColor: "lavender",
+                  borderRadius: 50,
+                  margin: 2
+                }}
+              >
+                <Text style={styles.recommendTitle}>거리 기반 추천</Text>
+                <FlatList
+                  data={distanceLocationData}
+                  renderItem={renderLocation}
+                  keyExtractor={() => uuid.v4()}
+                  scrollEnabled={false}
+                />
+              </View>
+              <View
+                style={{
+                  alignItems: "center",
+                  backgroundColor: "moccasin",
+                  borderRadius: 50,
+                  margin: 2
+                }}
+              >
+                <Text style={styles.recommendTitle}>평점 기반 추천</Text>
+                <FlatList
+                  data={reviewLocationData}
+                  renderItem={renderLocation}
+                  keyExtractor={() => uuid.v4()}
+                  scrollEnabled={false}
+                />
+              </View>
             </View>
-            <View
-              style={{
-                alignItems: "center",
-                backgroundColor: "lavender",
-                borderRadius: 50,
-                margin: 2
-              }}
-            >
-              <Text style={styles.recommendTitle}>거리 기반 추천</Text>
-              <FlatList
-                data={distanceLocationData}
-                renderItem={renderLocation}
-                keyExtractor={() => uuid.v4()}
-                scrollEnabled={false}
-              />
-            </View>
-            <View
-              style={{
-                alignItems: "center",
-                backgroundColor: "moccasin",
-                borderRadius: 50,
-                margin: 2
-              }}
-            >
-              <Text style={styles.recommendTitle}>평점 기반 추천</Text>
-              <FlatList
-                data={reviewLocationData}
-                renderItem={renderLocation}
-                keyExtractor={() => uuid.v4()}
-                scrollEnabled={false}
-              />
-            </View>
-          </View>
+          ) : (
+            <ActivityIndicator size="small" color="#0000ff" />
+          )}
         </View>
       </ScrollView>
     </SafeAreaView>

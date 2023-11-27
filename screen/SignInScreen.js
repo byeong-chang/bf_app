@@ -43,16 +43,16 @@ export default function SingIn({ navigation }) {
     // console.log("---> id: " + inputId);
     // console.log("---> pw: " + inputPw);
     console.log("---> token: " + token);
-    const value = token;
     const data = {
       userId: inputId,
       passwd: inputPw,
       token: token
     };
     const user = await api_post.login(data);
+
     console.log("-----로그인 진행중------");
-    if (user.error) {
-      console.log(user.message);
+
+    if (!user) {
       alert("해당 사용자가 없습니다. 회원가입을 해주세요.");
       return;
     }

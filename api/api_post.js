@@ -9,6 +9,7 @@ const login = async (data) => {
     body: JSON.stringify(data)
   })
     .then((res) => res.json())
+    .then((res) => console.log("----login--->", res))
     .catch((error) => console.log("---> error : " + error));
   return userDTO;
 };
