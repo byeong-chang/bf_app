@@ -1,14 +1,13 @@
 import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
-import Login from "./Test/LoginScreen";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import Root from "./Test/Root";
 import { NativeBaseProvider } from "native-base";
 import SingIn from "./screen/SignInScreen";
-import MainScreen from "./Test/Main";
 import SingUp from "./screen/SignUpScreen";
 import MainTab from "./screen/MainTab";
 import RecruitScreen from "./screen/RecruitmentScreen";
+import MainScreen from "./screen/MainScreen";
+import LocationDetailScreen from "./screen/LocationDetailScreen";
 
 const Stack = createNativeStackNavigator();
 
@@ -17,8 +16,30 @@ export default function App() {
     <NativeBaseProvider>
       <NavigationContainer>
         <Stack.Navigator initialRouteName="SignIn">
-          <Stack.Screen name="SignIn" component={SingIn} />
-          <Stack.Screen name="SignUp" component={SingUp} />
+          <Stack.Screen
+            name="SignIn"
+            component={SingIn}
+            options={{
+              headerTintColor: "black",
+              headerStyle: {
+                borderBottomColor: "black",
+                borderBottomWidth: 1,
+                backgroundColor: "steelblue"
+              }
+            }}
+          />
+          <Stack.Screen
+            name="SignUp"
+            component={SingUp}
+            options={{
+              headerTintColor: "black",
+              headerStyle: {
+                borderBottomColor: "black",
+                borderBottomWidth: 1,
+                backgroundColor: "steelblue"
+              }
+            }}
+          />
           <Stack.Screen
             name="MainTab"
             component={MainTab}
@@ -28,6 +49,18 @@ export default function App() {
           />
           <Stack.Screen name="Main" component={MainScreen} />
           <Stack.Screen name="Recruit" component={RecruitScreen} />
+          <Stack.Screen
+            name="LocationDetail"
+            component={LocationDetailScreen}
+            options={{
+              headerTintColor: "black",
+              headerStyle: {
+                borderBottomColor: "black",
+                borderBottomWidth: 1,
+                backgroundColor: "steelblue"
+              }
+            }}
+          />
         </Stack.Navigator>
       </NavigationContainer>
     </NativeBaseProvider>

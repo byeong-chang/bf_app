@@ -11,6 +11,33 @@ const tokenLogin = async (token) => {
   return result;
 };
 
-const api_get = { tokenLogin };
+const getLocationReview = async (locationID) => {
+  const result = await fetch(
+    `http://${myLocalIp}:8080/LocationReview/${locationID}`,
+    {
+      method: "GET"
+    }
+  )
+    .then((res) => {
+      return res.json();
+    })
+    .catch((error) => {
+      console.log("error is --->" + error);
+    });
+  return result;
+};
+
+const recruitmentAll = async () => {
+  const result = await fetch(`http://${myLocalIp}:8080/showAllRecruitment`, {
+    method: "GET"
+  })
+    .then((res) => res.json())
+    .catch((error) => {
+      console.log("error is --->" + error);
+    });
+  return result;
+};
+
+const api_get = { tokenLogin, getLocationReview, recruitmentAll };
 
 export default api_get;
