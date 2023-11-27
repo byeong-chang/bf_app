@@ -11,6 +11,20 @@ const tokenLogin = async (token) => {
   return result;
 };
 
-const api_get = { tokenLogin };
+const recruitmentAll = async () => {
+  const result = await fetch(`http://${myLocalIp}:8080/showAllRecruitment`, {
+    method: "GET"
+  })
+    .then((res) => res.json())
+    .catch((error) => {
+      console.log("error is --->" + error);
+    });
+  return result;
+}
+
+const api_get = { 
+  tokenLogin,
+  recruitmentAll
+};
 
 export default api_get;
