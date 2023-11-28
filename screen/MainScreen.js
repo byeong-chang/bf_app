@@ -14,6 +14,7 @@ import {
 import * as Update from "expo-updates";
 import * as Location from "expo-location";
 import api_post from "../api/api_post";
+
 import uuid from "react-native-uuid";
 
 const MainScreen = ({ route, navigation }) => {
@@ -101,28 +102,6 @@ const MainScreen = ({ route, navigation }) => {
         ></Button>
       </View>
     );
-    // {"address": "경상북도 구미시 구포동 1191",
-    //  "audioGuide": 0,
-    //  "bigPark": 1,
-    //   "brailleGuide": 1,
-    //    "closedDay": "공휴일",
-    //    "doorForDisabled": 1,
-    //    "freePark": 1,
-    //     "guideDogPermitted": 1,
-    //      "hobbyCategory": "대형체육시설",
-    //      "homepage": "www.ginco.or.kr/gupo/index.do",
-    //       "id": 1275,
-    //       "latitude": 36.13347341,
-    //       "longitude": 128.403414,
-    //       "locationCategory": "구미시",
-    //       "locationName": "구포동체육생활공원축구장",
-    //       "paidPark": 0,
-    //        "parkForDisabled": 1,
-    //        "phoneNumber": "054-480-2310",
-    //        "runtime": "월요일 09:00-22:00, 나머지 06:00-22:00",
-    //        "starRating": 0,
-    //        "toiletForDisabled": 1,
-    //        "wheelchairRental": 0}
   };
   return (
     <SafeAreaView>

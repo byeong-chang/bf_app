@@ -8,8 +8,9 @@ const login = async (data) => {
     },
     body: JSON.stringify(data)
   })
-    .then((res) => res.json())
-    .then((res) => console.log("----login--->", res))
+    .then((res) => {
+      return res.json();
+    })
     .catch((error) => console.log("---> error : " + error));
   return userDTO;
 };
@@ -35,8 +36,10 @@ const recommendLocation = async (data) => {
     },
     body: JSON.stringify(data)
   })
-    .then((res) => res.json())
-    .catch((error) => console.log("---> error : " + error));
+    .then((res) => {
+      return res.json();
+    })
+    .catch((error) => console.log("recommendLocation error ----> : " + error));
   return location;
 };
 const upload = async (data) => {

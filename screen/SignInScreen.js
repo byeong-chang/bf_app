@@ -51,12 +51,12 @@ export default function SingIn({ navigation }) {
     const user = await api_post.login(data);
 
     console.log("-----로그인 진행중------");
-
+    console.log(user);
     if (!user) {
       alert("해당 사용자가 없습니다. 회원가입을 해주세요.");
       return;
     }
-    navigation.navigate("MainTab", { value, user });
+    navigation.navigate("MainTab", { token, user });
   };
 
   const signUpHandle = async () => {
