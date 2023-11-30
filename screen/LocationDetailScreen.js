@@ -17,6 +17,7 @@ export default function LocationDetailScreen({ route, navigation }) {
   const [user, setUser] = useState(
     route.params.user ? route.params.user : null
   );
+
   const [location, setLocation] = useState(
     route.params.location ? route.params.location : null
   );
@@ -79,6 +80,7 @@ export default function LocationDetailScreen({ route, navigation }) {
     const res = await api_post.likeLocation(data);
     console.log(res);
     setUser(await api_get.tokenLogin(user.token));
+    alert("즐겨찾기에 추가했습니다.");
   };
   const renderReview = (review) => {
     return (

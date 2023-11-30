@@ -3,6 +3,8 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import RecruitScreen from "./RecruitmentScreen";
 import MainScreen from "./MainScreen";
 import Ionicons from "@expo/vector-icons/Ionicons";
+import LikeLocationScreen from "./LikeLocationListScreen";
+import { Fontisto } from "@expo/vector-icons";
 const Tab = createBottomTabNavigator();
 
 export default function MainTab({ route }) {
@@ -11,7 +13,7 @@ export default function MainTab({ route }) {
   return (
     <Tab.Navigator initialRouteName="Main">
       <Tab.Screen
-        name="Recrui"
+        name="Recruit"
         component={RecruitScreen}
         initialParams={{ user: user, token: token }}
         options={{
@@ -31,6 +33,23 @@ export default function MainTab({ route }) {
         options={{
           title: "메인",
           tabBarIcon: () => <Ionicons name="ios-home" size={24} />,
+          // headerTitleAlign: 'flex-start',
+          headerStyle: {
+            borderBottomColor: "black",
+            borderBottomWidth: 1,
+            backgroundColor: "steelblue"
+          }
+        }}
+      />
+      <Tab.Screen
+        name="LikeLocation"
+        component={LikeLocationScreen}
+        initialParams={{ user: user, token: token }}
+        options={{
+          title: "즐겨찾기",
+          tabBarIcon: () => (
+            <Fontisto name="favorite" size={24} color="black" />
+          ),
           // headerTitleAlign: 'flex-start',
           headerStyle: {
             borderBottomColor: "black",

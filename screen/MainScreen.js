@@ -75,12 +75,11 @@ const MainScreen = ({ route, navigation }) => {
         location: location.item
       });
     };
-    // console.log(
-    //   "user -> : " + userLocation.latitude + ", " + userLocation.longitude
-    // );
-    // console.log(
-    //   "location -> : " + location.item.latitude + ", " + location.item.longitude
-    // );
+
+    const renderSearchLocation = () => {
+      console.log(location);
+    };
+
     return (
       <View
         style={{

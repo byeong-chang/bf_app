@@ -8,6 +8,7 @@ import MainTab from "./screen/MainTab";
 import RecruitScreen from "./screen/RecruitmentScreen";
 import MainScreen from "./screen/MainScreen";
 import LocationDetailScreen from "./screen/LocationDetailScreen";
+import LikeLocationScreen from "./screen/LikeLocationListScreen";
 
 const Stack = createNativeStackNavigator();
 
@@ -61,6 +62,7 @@ export default function App() {
               }
             }}
           />
+          <Stack.Screen name="LikeLocation" component={LikeLocationScreen} />
         </Stack.Navigator>
       </NavigationContainer>
     </NativeBaseProvider>

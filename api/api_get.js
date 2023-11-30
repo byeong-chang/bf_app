@@ -38,6 +38,27 @@ const recruitmentAll = async () => {
   return result;
 };
 
-const api_get = { tokenLogin, getLocationReview, recruitmentAll };
+const showAllLikeLocation = async (toekn) => {
+  const result = await fetch(
+    `http://${myLocalIp}:8080/showAllLikeLocation/${toekn}`,
+    {
+      method: "GET"
+    }
+  )
+    .then((res) => {
+      return res.json();
+    })
+    .catch((error) => {
+      console.log("error is --->" + error);
+    });
+  return result;
+};
+
+const api_get = {
+  tokenLogin,
+  getLocationReview,
+  recruitmentAll,
+  showAllLikeLocation
+};
 
 export default api_get;
