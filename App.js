@@ -9,6 +9,7 @@ import RecruitScreen from "./screen/RecruitmentScreen";
 import MainScreen from "./screen/MainScreen";
 import LocationDetailScreen from "./screen/LocationDetailScreen";
 import LikeLocationScreen from "./screen/LikeLocationListScreen";
+import SearchLocationScreen from "./screen/SearchLocationScreen";
 
 const Stack = createNativeStackNavigator();
 
@@ -63,6 +64,10 @@ export default function App() {
             }}
           />
           <Stack.Screen name="LikeLocation" component={LikeLocationScreen} />
+          <Stack.Screen
+            name="SearchLocation"
+            component={SearchLocationScreen}
+          />
         </Stack.Navigator>
       </NavigationContainer>
     </NativeBaseProvider>

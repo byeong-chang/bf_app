@@ -14,7 +14,6 @@ import {
 import * as Update from "expo-updates";
 import * as Location from "expo-location";
 import api_post from "../api/api_post";
-
 import uuid from "react-native-uuid";
 
 const MainScreen = ({ route, navigation }) => {
@@ -74,10 +73,6 @@ const MainScreen = ({ route, navigation }) => {
         user: userInfo,
         location: location.item
       });
-    };
-
-    const renderSearchLocation = () => {
-      console.log(location);
     };
 
     return (
