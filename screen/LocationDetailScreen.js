@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import {
   Button,
   FlatList,
+  KeyboardAvoidingView,
   ScrollView,
   StyleSheet,
   Text,
@@ -80,7 +81,7 @@ export default function LocationDetailScreen({ route, navigation }) {
     const res = await api_post.likeLocation(data);
     console.log(res);
     setUser(await api_get.tokenLogin(user.token));
-    alert("즐겨찾기에 추가했습니다.");
+    alert("즐겨찾기에 추가하였습니다.");
   };
   const renderReview = (review) => {
     return (
@@ -109,96 +110,99 @@ export default function LocationDetailScreen({ route, navigation }) {
     );
   };
   return (
-    <View style={{ alignItems: "center" }}>
-      <View style={{ alignItems: "center", justifyContent: "center" }}>
-        <Text>{location.address}</Text>
-        <Text>오디오 가이드 : {location.audioGuide ? "제공" : "없음"}</Text>
-        <Text>대형주차장 : {location.bigPark ? "제공" : "없음"}</Text>
-        <Text>점자 가이드 : {location.brailleGuide ? "제공" : "없음"}</Text>
-        <Text>휴무일 : {location.closedDay}</Text>
-        <Text>
-          장애인용 출입문 : {location.doorForDisabled ? "제공" : "없음"}
-        </Text>
-        <Text>무료주차 : {location.freePark ? "가능" : "불가"}</Text>
-        <Text>
-          시각장애인 안내견 동반 가능 여부 :{" "}
-          {location.guideDogPermitted ? "가능" : "불가"}
-        </Text>
-        <Text>유료주차 : {location.paidPark ? "가능" : "불가"}</Text>
-        <Text>
-          장애인 전용 주차장 여부 : {location.parkForDisabled ? "제공" : "없음"}
-        </Text>
-        <Text>전화번호 : {location.phoneNumber}</Text>
-        <Text>운영시간 : {location.runtime}</Text>
-        <Text>별점 : {location.starRating}</Text>
-        <Text>
-          장애인 전용 화장실 : {location.toiletForDisabled ? "제공" : "없음"}
-        </Text>
-        <Text>
-          휠체어 대여 여부 : {location.wheelchairRental ? "가능" : "불가"}
-        </Text>
-      </View>
-      <Button title={location.homepage} onPress={handleURL} />
-      <Button title="즐겨찾기" onPress={handleFavorite} />
-      {showReview ? (
-        <ScrollView
-          style={{
-            backgroundColor: "lightgray",
-            borderRadius: 10,
-            width: "100%",
-            height: "25%"
-          }}
-        >
-          <FlatList
-            data={review}
-            renderItem={renderReview}
-            keyExtractor={() => uuid.v4()}
-            scrollEnabled={false}
-          />
-        </ScrollView>
-      ) : (
-        <Text>리뷰가 없습니다.</Text>
-      )}
-      <View>
-        <View
-          style={{
-            flexDirection: "row",
-            alignItems: "center",
-            backgroundColor: "ivory",
-            borderWidth: 1,
-            borderRadius: 10,
-            width: "100%"
-          }}
-        >
-          <TextInput
-            placeholder="별점"
-            textAlign="center"
-            placeholderTextColor={"black"}
+    <KeyboardAvoidingView>
+      <View style={{ alignItems: "center" }}>
+        <View style={{ alignItems: "center", justifyContent: "center" }}>
+          <Text>{location.address}</Text>
+          <Text>오디오 가이드 : {location.audioGuide ? "제공" : "없음"}</Text>
+          <Text>대형주차장 : {location.bigPark ? "제공" : "없음"}</Text>
+          <Text>점자 가이드 : {location.brailleGuide ? "제공" : "없음"}</Text>
+          <Text>휴무일 : {location.closedDay}</Text>
+          <Text>
+            장애인용 출입문 : {location.doorForDisabled ? "제공" : "없음"}
+          </Text>
+          <Text>무료주차 : {location.freePark ? "가능" : "불가"}</Text>
+          <Text>
+            시각장애인 안내견 동반 가능 여부 :{" "}
+            {location.guideDogPermitted ? "가능" : "불가"}
+          </Text>
+          <Text>유료주차 : {location.paidPark ? "가능" : "불가"}</Text>
+          <Text>
+            장애인 전용 주차장 여부 :{" "}
+            {location.parkForDisabled ? "제공" : "없음"}
+          </Text>
+          <Text>전화번호 : {location.phoneNumber}</Text>
+          <Text>운영시간 : {location.runtime}</Text>
+          <Text>별점 : {location.starRating}</Text>
+          <Text>
+            장애인 전용 화장실 : {location.toiletForDisabled ? "제공" : "없음"}
+          </Text>
+          <Text>
+            휠체어 대여 여부 : {location.wheelchairRental ? "가능" : "불가"}
+          </Text>
+        </View>
+        <Button title={location.homepage} onPress={handleURL} />
+        <Button title="즐겨찾기" onPress={handleFavorite} />
+        {showReview ? (
+          <ScrollView
             style={{
-              height: 50,
-
-              flex: 0.2,
-              borderRightWidth: 1
+              backgroundColor: "lightgray",
+              borderRadius: 10,
+              width: "100%",
+              height: "25%"
             }}
-            maxLength={3}
-            onChangeText={setStarRank}
-          />
-          <TextInput
-            placeholder="리뷰를 입력해주세요"
-            textAlign="center"
-            placeholderTextColor={"black"}
+          >
+            <FlatList
+              data={review}
+              renderItem={renderReview}
+              keyExtractor={() => uuid.v4()}
+              scrollEnabled={false}
+            />
+          </ScrollView>
+        ) : (
+          <Text>리뷰가 없습니다.</Text>
+        )}
+        <View>
+          <View
             style={{
-              height: 50,
-              flex: 1,
-              borderRightWidth: 1
+              flexDirection: "row",
+              alignItems: "center",
+              backgroundColor: "ivory",
+              borderWidth: 1,
+              borderRadius: 10,
+              width: "100%"
             }}
-            maxLength={50}
-            onChangeText={setWriteReview}
-          />
+          >
+            <TextInput
+              placeholder="별점"
+              textAlign="center"
+              placeholderTextColor={"black"}
+              style={{
+                height: 50,
 
-          <Button title="입력" onPress={handleWriteReview} />
+                flex: 0.2,
+                borderRightWidth: 1
+              }}
+              maxLength={3}
+              onChangeText={setStarRank}
+            />
+            <TextInput
+              placeholder="리뷰를 입력해주세요"
+              textAlign="center"
+              placeholderTextColor={"black"}
+              style={{
+                height: 50,
+                flex: 1,
+                borderRightWidth: 1
+              }}
+              maxLength={50}
+              onChangeText={setWriteReview}
+            />
+
+            <Button title="입력" onPress={handleWriteReview} />
+          </View>
         </View>
       </View>
-    </View>
+    </KeyboardAvoidingView>
   );
 }
