@@ -17,7 +17,6 @@ import api_post from "../api/api_post";
 import uuid from "react-native-uuid";
 
 const MainScreen = ({ route, navigation }) => {
-  console.log("-----------Main----------");
   const token = route.params.token ? route.params.token : route.params.value;
   const userInfo = route.params.user;
   const [userLocation, setUserLocation] = useState({
@@ -29,8 +28,6 @@ const MainScreen = ({ route, navigation }) => {
   const [distanceLocationData, setDistanceLD] = useState({});
   const [reviewLocationData, setReviewLD] = useState({});
   const [loading, setLoading] = useState(false);
-
-  console.log("user token is ----> : " + token);
 
   const getLocation = async () => {
     try {

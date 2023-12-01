@@ -52,7 +52,7 @@ export default function SingIn({ navigation }) {
 
     console.log("-----로그인 진행중------");
     console.log(user);
-    if (!user) {
+    if (!user.userId) {
       alert("해당 사용자가 없습니다. 회원가입을 해주세요.");
       return;
     }
@@ -86,7 +86,7 @@ export default function SingIn({ navigation }) {
           style={styles.textInput}
           onChangeText={setInputId}
         />
-        <Text>{inputId ? inputId : "no input email"}</Text>
+
         <TextInput
           placeholder="비밀번호를 입력해주세요"
           placeholderTextColor={"black"}
@@ -95,7 +95,6 @@ export default function SingIn({ navigation }) {
           style={styles.textInput}
           onChangeText={setPw}
         />
-        <Text>{inputPw ? inputPw : "no input password"}</Text>
       </View>
       <View style={{ justifyContent: "center", flexDirection: "row" }}>
         <Button title="회원가입" width={"50%"} onPress={signUpHandle}></Button>
@@ -116,6 +115,7 @@ const styles = StyleSheet.create({
     backgroundColor: "gray",
     height: 30,
     width: "70%",
-    textAlign: "center"
+    textAlign: "center",
+    margin: 10
   }
 });

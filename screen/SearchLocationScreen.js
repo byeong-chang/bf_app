@@ -347,12 +347,16 @@ export default function SearchLocationScreen({ route, navigation }) {
           }}
         >
           <Text style={styles.recommendTitle}>검색 추천</Text>
-          <FlatList
-            data={locations}
-            renderItem={renderLocation}
-            keyExtractor={() => uuid.v4()}
-            scrollEnabled={false}
-          />
+          {locations.length > 0 ? (
+            <FlatList
+              data={locations}
+              renderItem={renderLocation}
+              keyExtractor={() => uuid.v4()}
+              scrollEnabled={false}
+            />
+          ) : (
+            <Text>검색결과가 없습니다.</Text>
+          )}
         </View>
       </ScrollView>
     </View>

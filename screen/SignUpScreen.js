@@ -301,9 +301,6 @@ export default function SingUp({ navigation, route }) {
   };
   return (
     <View style={{ alignItems: "center", justifyContent: "center" }}>
-      {/* token */}
-      <Text style={{ padding: 5 }}>{token}</Text>
-
       {/* id */}
       <TextInput
         placeholder="아이디를 입력해주세요"
@@ -312,7 +309,6 @@ export default function SingUp({ navigation, route }) {
         style={styles.textInput}
         onChangeText={setUserId}
       />
-      <Text>{userId ? "아이디 : " + userId : "no id"}</Text>
 
       {/* pw */}
       <TextInput
@@ -323,7 +319,6 @@ export default function SingUp({ navigation, route }) {
         onChangeText={setPasswd}
         secureTextEntry={true}
       />
-      <Text>{passwd ? "비밀번호 : " + passwd : "no passwd"}</Text>
 
       {/* check pwd */}
       <TextInput
@@ -348,7 +343,6 @@ export default function SingUp({ navigation, route }) {
         style={styles.textInput}
         onChangeText={setEmail}
       />
-      <Text>{email ? "이메일 : " + email : "no email"}</Text>
 
       {/* username */}
       <TextInput
@@ -358,7 +352,6 @@ export default function SingUp({ navigation, route }) {
         style={styles.textInput}
         onChangeText={setUsername}
       />
-      <Text>{username ? "닉네임 : " + username : "no username"}</Text>
 
       {/* hobby */}
       <View width="70%">
@@ -375,7 +368,6 @@ export default function SingUp({ navigation, route }) {
           dropdownShown={false}
         />
       </View>
-      <Text>{hobby}</Text>
 
       {/* disableData */}
       <View width="70%">
@@ -393,7 +385,6 @@ export default function SingUp({ navigation, route }) {
           dropdownShown={false}
         />
       </View>
-      <Text>{disabledCategory}</Text>
 
       {/* locationCategory */}
       <View width="70%">
@@ -410,7 +401,7 @@ export default function SingUp({ navigation, route }) {
           dropdownShown={false}
         />
       </View>
-      <Text>{locationCategory}</Text>
+
       <Button title="회원가입" width={"50%"} onPress={handleSignUp}></Button>
     </View>
   );
@@ -427,6 +418,7 @@ const styles = StyleSheet.create({
     backgroundColor: "gray",
     height: 30,
     width: "70%",
-    textAlign: "center"
+    textAlign: "center",
+    margin: 10
   }
 });

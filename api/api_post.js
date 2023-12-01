@@ -11,7 +11,7 @@ const login = async (data) => {
     .then((res) => {
       return res.json();
     })
-    .catch((error) => console.log("---> error : " + error));
+    .catch((error) => console.log("---> login error : " + error));
   return userDTO;
 };
 
@@ -23,8 +23,10 @@ const signUp = async (data) => {
     },
     body: JSON.stringify(data)
   })
-    .then((res) => res.json())
-    .catch((error) => console.log("---> error : " + error));
+    .then((res) => {
+      return res.json();
+    })
+    .catch((error) => console.log("---> signUp error : " + error));
   return userDTO;
 };
 
@@ -53,23 +55,22 @@ const upload = async (data) => {
       body: JSON.stringify(data)
     }
   )
-    .then((res) => {return res.json()})
-    .catch((error) => console.log("---> error : " + error));
+    .then((res) => {
+      return res.json();
+    })
+    .catch((error) => console.log("--->upload error : " + error));
   return recruitmentDTO;
 };
 const uploadChat = async (data) => {
-  const recruitmentDTO = await fetch(
-    `http://${myLocalIp}:8080/writeChatting`,
-    {
-      method: "POST",
-      headers: {
-        "content-type": "application/json"
-      },
-      body: JSON.stringify(data)
-    }
-  )
+  const recruitmentDTO = await fetch(`http://${myLocalIp}:8080/writeChatting`, {
+    method: "POST",
+    headers: {
+      "content-type": "application/json"
+    },
+    body: JSON.stringify(data)
+  })
     .then((res) => res.json())
-    .catch((error) => console.log("---> error : " + error));
+    .catch((error) => console.log("--->uploadChat error : " + error));
   return recruitmentDTO;
 };
 
@@ -84,7 +85,7 @@ const writeReview = async (data) => {
     .then((res) => {
       return res.json();
     })
-    .catch((error) => console.log("---> error : " + error));
+    .catch((error) => console.log("---> writeReviewerror : " + error));
   return reviewRes;
 };
 
@@ -99,7 +100,7 @@ const likeLocation = async (data) => {
     .then((res) => {
       return res.json();
     })
-    .catch((error) => console.log("---> error : " + error));
+    .catch((error) => console.log("--->likeLocation error : " + error));
   return likeRes;
 };
 
@@ -114,7 +115,7 @@ const searchLocation = async (data) => {
     .then((res) => {
       return res.json();
     })
-    .catch((error) => console.log("---> error : " + error));
+    .catch((error) => console.log("--->searchLocation error : " + error));
   return likeRes;
 };
 

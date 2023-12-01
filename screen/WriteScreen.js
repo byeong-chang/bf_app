@@ -23,7 +23,7 @@ const WriteScreen = ({ route, navigation }) => {
       const data = {
         title: title,
         locationId: locationId,
-        userId: userInfo.userId,
+        userId: userInfo.id,
         reservationDate: reservationDate,
         content: content
       };
@@ -77,7 +77,7 @@ const WriteScreen = ({ route, navigation }) => {
       <Button title="올리기" onPress={handleUpload} />
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -87,14 +87,14 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     fontSize: 15,
     width: "100%",
-    margin: 5,
+    margin: 5
   },
   textInput: {
     backgroundColor: "white",
     height: 30,
     fontSize: 15,
     width: "100%",
-    margin: 5,
+    margin: 5
   },
   contentInput: {
     fontSize: 15,
@@ -103,7 +103,7 @@ const styles = StyleSheet.create({
     height: 200,
     textAlignVertical: "top",
     margin: 5,
-    padding: 5,
+    padding: 5
   },
   postingBox: {
     margin: "10px"

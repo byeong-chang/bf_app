@@ -3,7 +3,7 @@ import { Button, ScrollView, Text, View } from "react-native";
 import api_get from "../api/api_get";
 import MapView, { Marker, Callout } from "react-native-maps";
 
-export default function LikeLocationScreen({ route }) {
+export default function LikeLocationScreen({ route, navigation }) {
   const [token, setToken] = useState(
     route.params.token ? route.params.token : route.params.value
   );
@@ -19,34 +19,41 @@ export default function LikeLocationScreen({ route }) {
     likeLocations();
   }, [route]);
 
-  const renderLocationDetail = (location) => (
-    <Marker
-      key={location.locationId}
-      coordinate={{
-        latitude: location.latitude,
-        longitude: location.longitude
-      }}
-    >
-      <Callout>
-        <View>
-          <Text onPress={() => console.log(location.locationName)}>
-            {location.locationName}
-          </Text>
-        </View>
-      </Callout>
-    </Marker>
-  );
+  const renderLocationDetail = (location) => {
+    const handleClick = async () => {
+      const locationData = await api_get.getLocation(location.locationId);
+      navigation.navigate("LocationDetail", {
+        user: user,
+        location: locationData.location
+      });
+    };
+    return (
+      <Marker
+        key={location.locationId}
+        coordinate={{
+          latitude: location.latitude,
+          longitude: location.longitude
+        }}
+      >
+        <Callout style={{}}>
+          <View>
+            <Text onPress={handleClick}>{location.locationName}</Text>
+            {/* <Button title={location.locationName} /> */}
+          </View>
+        </Callout>
+      </Marker>
+    );
+  };
+
   return (
-    <View style={{ width: "100%", height: "100%" }}>
-      <ScrollView style={{ width: "100%", height: "100%" }}>
-        {locations ? (
-          <MapView style={{ width: "100%", height: 500 }}>
-            {locations.map(renderLocationDetail)}
-          </MapView>
-        ) : (
-          <Text>No Locations</Text>
-        )}
-      </ScrollView>
-    </View>
+    <ScrollView style={{ width: "100%", height: "100%" }}>
+      {locations ? (
+        <MapView style={{ width: "100%", height: 700 }}>
+          {locations.map(renderLocationDetail)}
+        </MapView>
+      ) : (
+        <Text>No Locations</Text>
+      )}
+    </ScrollView>
   );
 }

@@ -24,6 +24,7 @@ export default function App() {
             name="SignIn"
             component={SingIn}
             options={{
+              title: "로그인",
               headerTintColor: "black",
               headerStyle: {
                 borderBottomColor: "black",
@@ -36,6 +37,7 @@ export default function App() {
             name="SignUp"
             component={SingUp}
             options={{
+              title: "회원가입",
               headerTintColor: "black",
               headerStyle: {
                 borderBottomColor: "black",
@@ -52,7 +54,18 @@ export default function App() {
             }}
           />
           <Stack.Screen name="Main" component={MainScreen} />
-          <Stack.Screen name="Recruit" component={RecruitScreen} />
+          <Stack.Screen
+            name="Recruit"
+            component={RecruitScreen}
+            options={{
+              headerTintColor: "black",
+              headerStyle: {
+                borderBottomColor: "black",
+                borderBottomWidth: 1,
+                backgroundColor: "steelblue"
+              }
+            }}
+          />
           <Stack.Screen
             name="LocationDetail"
             component={LocationDetailScreen}

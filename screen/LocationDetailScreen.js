@@ -27,9 +27,7 @@ export default function LocationDetailScreen({ route, navigation }) {
   const [writeReview, setWriteReview] = useState();
   const [starRank, setStarRank] = useState();
   const [result, setResult] = useState();
-  // console.log(location);
-  // console.log(location.id);
-  // console.log(location.hobbyCategory);
+
   useEffect(() => {
     navigation.setOptions({
       title: `${location.locationName}`
@@ -41,8 +39,13 @@ export default function LocationDetailScreen({ route, navigation }) {
         setShowReview(true);
       }
     };
+    const getLocationDto = async () => {
+      const getLocationData = await api_get.getLocation(location.id);
+      setLocation(getLocationData.location);
+    };
     getReview();
-  }, [result]);
+    getLocationDto();
+  }, [result, user]);
 
   const handleURL = async () => {
     // console.log(location.homepage);
@@ -70,6 +73,8 @@ export default function LocationDetailScreen({ route, navigation }) {
     setResult(resultData);
   };
   const handleFavorite = async () => {
+    setUser(await api_get.tokenLogin(user.token));
+    console.log(user.likeLocation);
     if (user.likeLocation.includes(location.id)) {
       alert("이미 즐겨찾기 되어있습니다.");
       return;
@@ -79,7 +84,7 @@ export default function LocationDetailScreen({ route, navigation }) {
       locationId: location.id
     };
     const res = await api_post.likeLocation(data);
-    console.log(res);
+    console.log("즐겨찾기 : ", res);
     setUser(await api_get.tokenLogin(user.token));
     alert("즐겨찾기에 추가하였습니다.");
   };
@@ -133,7 +138,7 @@ export default function LocationDetailScreen({ route, navigation }) {
           </Text>
           <Text>전화번호 : {location.phoneNumber}</Text>
           <Text>운영시간 : {location.runtime}</Text>
-          <Text>별점 : {location.starRating}</Text>
+          <Text>별점 : {location.starRating.toFixed(2)}</Text>
           <Text>
             장애인 전용 화장실 : {location.toiletForDisabled ? "제공" : "없음"}
           </Text>
@@ -141,7 +146,11 @@ export default function LocationDetailScreen({ route, navigation }) {
             휠체어 대여 여부 : {location.wheelchairRental ? "가능" : "불가"}
           </Text>
         </View>
-        <Button title={location.homepage} onPress={handleURL} />
+        {location.homepage == "정보없음" ? (
+          <Button title={location.homepage} />
+        ) : (
+          <Button title={location.homepage} onPress={handleURL} />
+        )}
         <Button title="즐겨찾기" onPress={handleFavorite} />
         {showReview ? (
           <ScrollView
@@ -149,7 +158,7 @@ export default function LocationDetailScreen({ route, navigation }) {
               backgroundColor: "lightgray",
               borderRadius: 10,
               width: "100%",
-              height: "25%"
+              height: "22%"
             }}
           >
             <FlatList

@@ -23,7 +23,8 @@ export default function MainTab({ route }) {
           // headerTitleAlign: 'flex-start',
           headerStyle: {
             borderBottomColor: "black",
-            borderBottomWidth: 1
+            borderBottomWidth: 1,
+            backgroundColor: "steelblue"
           }
         }}
       />
