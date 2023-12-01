@@ -53,6 +53,21 @@ const upload = async (data) => {
       body: JSON.stringify(data)
     }
   )
+    .then((res) => {return res.json()})
+    .catch((error) => console.log("---> error : " + error));
+  return recruitmentDTO;
+};
+const uploadChat = async (data) => {
+  const recruitmentDTO = await fetch(
+    `http://${myLocalIp}:8080/writeChatting`,
+    {
+      method: "POST",
+      headers: {
+        "content-type": "application/json"
+      },
+      body: JSON.stringify(data)
+    }
+  )
     .then((res) => res.json())
     .catch((error) => console.log("---> error : " + error));
   return recruitmentDTO;
@@ -102,11 +117,13 @@ const searchLocation = async (data) => {
     .catch((error) => console.log("---> error : " + error));
   return likeRes;
 };
+
 const api_post = {
   login,
   signUp,
   recommendLocation,
   upload,
+  uploadChat,
   writeReview,
   likeLocation,
   searchLocation

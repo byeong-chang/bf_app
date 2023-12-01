@@ -37,6 +37,32 @@ const recruitmentAll = async () => {
     });
   return result;
 };
+const recruitmentDetail = async (recruitmentId) => {
+  const result = await fetch(`http://${myLocalIp}:8080/showDetailRecruitment/${recruitmentId}`, {
+    method: "GET"
+  })
+    .then((res) => res.json())
+    .catch((error) => {
+      console.log("error is --->" + error);
+    });
+  return result;
+}
+const showAllLikeLocation = async (toekn) => {
+  const result = await fetch(
+    `http://${myLocalIp}:8080/showAllLikeLocation/${toekn}`,
+    {
+      method: "GET"
+    }
+  )
+    .then((res) => {
+      return res.json();
+    })
+    .catch((error) => {
+      console.log("error is --->" + error);
+    });
+  return result;
+
+}
 
 const showAllLikeLocation = async (toekn) => {
   const result = await fetch(
@@ -54,11 +80,13 @@ const showAllLikeLocation = async (toekn) => {
   return result;
 };
 
+
 const api_get = {
   tokenLogin,
   getLocationReview,
   recruitmentAll,
-  showAllLikeLocation
+  showAllLikeLocation,
+  recruitmentDetail
 };
 
 export default api_get;
