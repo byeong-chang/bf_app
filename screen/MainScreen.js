@@ -14,7 +14,6 @@ import {
 import * as Update from "expo-updates";
 import * as Location from "expo-location";
 import api_post from "../api/api_post";
-
 import uuid from "react-native-uuid";
 
 const MainScreen = ({ route, navigation }) => {
@@ -75,12 +74,7 @@ const MainScreen = ({ route, navigation }) => {
         location: location.item
       });
     };
-    // console.log(
-    //   "user -> : " + userLocation.latitude + ", " + userLocation.longitude
-    // );
-    // console.log(
-    //   "location -> : " + location.item.latitude + ", " + location.item.longitude
-    // );
+
     return (
       <View
         style={{
