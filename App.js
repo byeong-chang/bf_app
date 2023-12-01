@@ -70,6 +70,7 @@ export default function App() {
             name="SearchLocation"
             component={SearchLocationScreen}
           />
+
           <Stack.Screen
             name="Write"
             component={WriteScreen}
