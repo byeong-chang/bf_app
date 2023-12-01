@@ -8,6 +8,8 @@ import MainTab from "./screen/MainTab";
 import RecruitScreen from "./screen/RecruitmentScreen";
 import MainScreen from "./screen/MainScreen";
 import LocationDetailScreen from "./screen/LocationDetailScreen";
+import WriteScreen from "./screen/WriteScreen";
+import MatchScreen from "./screen/MatchScreen";
 
 const Stack = createNativeStackNavigator();
 
@@ -52,6 +54,30 @@ export default function App() {
           <Stack.Screen
             name="LocationDetail"
             component={LocationDetailScreen}
+            options={{
+              headerTintColor: "black",
+              headerStyle: {
+                borderBottomColor: "black",
+                borderBottomWidth: 1,
+                backgroundColor: "steelblue"
+              }
+            }}
+          />
+          <Stack.Screen
+            name="Write"
+            component={WriteScreen}
+            options={{
+              headerTintColor: "black",
+              headerStyle: {
+                borderBottomColor: "black",
+                borderBottomWidth: 1,
+                backgroundColor: "steelblue"
+              }
+            }}
+          />
+          <Stack.Screen
+            name="Match"
+            component={MatchScreen}
             options={{
               headerTintColor: "black",
               headerStyle: {

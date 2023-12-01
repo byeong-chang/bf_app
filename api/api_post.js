@@ -57,11 +57,28 @@ const upload = async (data) => {
     .catch((error) => console.log("---> error : " + error));
   return recruitmentDTO;
 };
+const uploadChat = async (data) => {
+  const recruitmentDTO = await fetch(
+    `http://${myLocalIp}:8080/writeChatting`,
+    {
+      method: "POST",
+      headers: {
+        "content-type": "application/json"
+      },
+      body: JSON.stringify(data)
+    }
+  )
+    .then((res) => res.json())
+    .catch((error) => console.log("---> error : " + error));
+  return recruitmentDTO;
+};
+
 const api_post = {
   login,
   signUp,
   recommendLocation,
-  upload
+  upload,
+  uploadChat
 };
 
 export default api_post;
