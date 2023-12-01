@@ -8,6 +8,10 @@ import MainTab from "./screen/MainTab";
 import RecruitScreen from "./screen/RecruitmentScreen";
 import MainScreen from "./screen/MainScreen";
 import LocationDetailScreen from "./screen/LocationDetailScreen";
+import LikeLocationScreen from "./screen/LikeLocationListScreen";
+import SearchLocationScreen from "./screen/SearchLocationScreen";
+import MatchScreen from "./screen/MatchScreen";
+import WriteScreen from "./screen/WriteScreen";
 
 const Stack = createNativeStackNavigator();
 
