@@ -15,8 +15,14 @@ const WriteScreen = ({ route, navigation }) => {
   const [title, setTitle] = useState(null);
   const [locationId, setLocationId] = useState(null);
   const [reservationDate, setReservationDate] = useState(null);
+  const [year, setYear] = useState(null);
+  const [month, setMonth] = useState(null);
+  const [day, setDay] = useState(null);
   const [content, setContent] = useState(null);
   const userInfo = route.params.user;
+
+  const handleYear = (text) => {
+  }
 
   const handleUpload = async () => {
     if (title && locationId && reservationDate && content) {
@@ -27,7 +33,14 @@ const WriteScreen = ({ route, navigation }) => {
         reservationDate: reservationDate,
         content: content
       };
-      const res = await api_post.upload(data);
+      const res = await api_post.upload(data)
+      .catch(() => {
+        alert('작성 실패. 입력 형태를 맞춰주세요');
+      });
+      if(res === undefined) {
+        alert('작성 실패. 입력 형태를 맞춰주세요');
+        return;
+      }
       console.log(res);
       return;
     }
@@ -47,25 +60,47 @@ const WriteScreen = ({ route, navigation }) => {
       </Text>
       <TextInput
         placeholder="제목"
-        placeholderTextColor={"black"}
         maxLength={30}
         style={styles.textInput}
         onChangeText={setTitle}
       />
       <TextInput
         placeholder="장소ID"
-        placeholderTextColor={"black"}
         maxLength={10}
         style={styles.textInput}
         onChangeText={setLocationId}
       />
       <TextInput
         placeholder="날짜(0000-00-00)"
-        placeholderTextColor={"black"}
         maxLength={10}
         style={styles.textInput}
         onChangeText={setReservationDate}
       />
+      <View style={{flexDirection: "row"}}>
+      <Text style={styles.dateText}>날짜:  </Text>
+        <TextInput 
+          placeholder="0000" 
+          maxLength={4}
+          value={year}
+          style={styles.numInput}
+          keyboardType="number-pad"
+          onChange={handleYear}
+        />
+        <Text style={styles.dateText}> - </Text>
+        <TextInput 
+          placeholder="00" 
+          maxLength={2}
+          style={styles.numInput}
+          keyboardType="number-pad"
+        />
+        <Text style={styles.dateText}> - </Text>
+        <TextInput
+          placeholder="00" 
+          maxLength={2}
+          style={styles.numInput}
+          keyboardType="number-pad"
+        />
+      </View>
       <TextInput
         placeholder="게시글 내용(최대 100자)"
         placeholderTextColor={"black"}
@@ -93,8 +128,16 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     height: 30,
     fontSize: 15,
-    width: "100%",
     margin: 5
+  },
+  dateText: {
+    backgroundColor: "white",
+    fontSize: 15,
+  },
+  numInput: {
+    backgroundColor: "white",
+    backgroundColor: "white",
+    fontSize: 15,
   },
   contentInput: {
     fontSize: 15,

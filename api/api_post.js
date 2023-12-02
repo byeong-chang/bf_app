@@ -118,6 +118,20 @@ const searchLocation = async (data) => {
     .catch((error) => console.log("--->searchLocation error : " + error));
   return likeRes;
 };
+const matching = async (data) => {
+  const recruitmentDTO = await fetch(`http://${myLocalIp}:8080/saveMatchingResult`, {
+    method: "POST",
+    headers: {
+      "content-type": "application/json"
+    },
+    body: JSON.stringify(data)
+  })
+    .then((res) => {
+      return res.json();
+    })
+    .catch((error) => console.log("--->matching error : " + error));
+  return recruitmentDTO;
+};
 
 const api_post = {
   login,
@@ -127,7 +141,8 @@ const api_post = {
   uploadChat,
   writeReview,
   likeLocation,
-  searchLocation
+  searchLocation,
+  matching
 };
 
 export default api_post;

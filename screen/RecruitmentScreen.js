@@ -10,6 +10,7 @@ import {
 import api_get from "../api/api_get";
 
 const RecruitScreen = ({ route, navigation }) => {
+  const [re, setRe] = useState(false);
   const [data, setData] = useState([]);
 
   useEffect(() => {
@@ -18,13 +19,14 @@ const RecruitScreen = ({ route, navigation }) => {
       setData(() => postingData);
     };
     getData();
-  }, [route, navigation]);
+  }, [route, navigation, re]);
 
-  function PostingBox({ title, location, userId, recruitId, date }) {
+  function PostingBox(props) {
 
     const handlePostingDetail = () => {
       navigation.navigate("Match", {
-        recruitId: recruitId,
+        recruitId: props.recruitId,
+        user: route.params.user,
         token: route.params.token ? route.params.token : route.params.value
       });
     }
@@ -38,11 +40,12 @@ const RecruitScreen = ({ route, navigation }) => {
         }}
       >
         <Text style={{ textAlign: "center", fontWeight: "bold", fontSize: 20 }}>
-          {title}
+          {props.title}
         </Text>
-        <Text style={{ textAlign: "right" }}>요청자: {userId}</Text>
+        <Text style={{ textAlign: "right" }}>{props.flag?'매칭완료':'매칭대기'}</Text>
+        <Text style={{ textAlign: "right" }}>요청자: {props.userId}</Text>
         <Text style={{ textAlign: "center" }}>
-          {location} / {date}
+          {props.location} / {props.date}
         </Text>
         <Button title='자세히보기' onPress={handlePostingDetail} />
       </View>
@@ -54,6 +57,7 @@ const RecruitScreen = ({ route, navigation }) => {
       key={`postingbox-${po.id}`}
       title={po.title}
       location={po.location.locationName}
+      flag={po.flag}
       userId={po.user.userId}
       recruitId={po.id}
       date={po.reservationDate}
@@ -70,6 +74,9 @@ const RecruitScreen = ({ route, navigation }) => {
   return (
     <View style={{ flex: 1 }}>
       <Button title="게시글 작성" onPress={handleWrite} />
+      <Button title="새로고침" onPress={() => {setRe((p) => (!p))}} 
+        style={{ width: "50%"}}
+      />
       <ScrollView>{postings}</ScrollView>
     </View>
   );
