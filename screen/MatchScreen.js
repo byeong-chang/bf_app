@@ -204,14 +204,17 @@ const MatchScreen = ({ route, navigation }) => {
             {data.content}
           </Text>
         </View>
+        {
+          data.user.userId === route.params.user.userId?
+          <View  style={{ flexDirection: "row" }}>
+            <Button title="매칭" onPress={handleMatch}/>
+            <TextInput placeholder="매칭 상대" onChangeText={setName}
+              style={{width: "70%", backgroundColor: "ivory",
+              borderWidth: 1, textAlign: "center"}}
+            />
+          </View>:null
+        }
         
-        <View  style={{ flexDirection: "row" }}>
-          <Button title="매칭" onPress={handleMatch}/>
-          <TextInput placeholder="매칭 상대" onChangeText={setName}
-            style={{width: "70%", backgroundColor: "ivory",
-            borderWidth: 1, textAlign: "center"}}
-          />
-        </View>
         <ChattingList chatLogList={data.chatLogList} />
       </ScrollView>
     </View>
