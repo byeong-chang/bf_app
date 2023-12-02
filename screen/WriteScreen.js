@@ -9,39 +9,52 @@ import {
   TouchableWithoutFeedback
 } from "react-native";
 import api_post from "../api/api_post";
-import api_get from "../api/api_get";
 
 const WriteScreen = ({ route, navigation }) => {
   const [title, setTitle] = useState(null);
   const [locationId, setLocationId] = useState(null);
-  const [reservationDate, setReservationDate] = useState(null);
   const [year, setYear] = useState(null);
   const [month, setMonth] = useState(null);
   const [day, setDay] = useState(null);
   const [content, setContent] = useState(null);
   const userInfo = route.params.user;
 
-  const handleYear = (text) => {
-  }
-
   const handleUpload = async () => {
-    if (title && locationId && reservationDate && content) {
+    const dateYear = parseInt(year);
+    const dateMonth = parseInt(month);
+    const dateDay = parseInt(day);
+    console.log(`${dateYear}-${dateMonth}-${dateDay}`);
+    if(isNaN(dateYear)) {
+      alert('wrong year');
+      return;
+    }
+    else if(isNaN(dateMonth)) {
+      alert('wrong month');
+      return;
+    }
+    else if(isNaN(dateDay)) {
+      alert('wrong day');
+      return;
+    }
+    else if (title && locationId && content) {
       const data = {
         title: title,
         locationId: locationId,
         userId: userInfo.id,
-        reservationDate: reservationDate,
+        reservationDate: `${dateYear}-${dateMonth}-${dateDay}`,
         content: content
       };
       const res = await api_post.upload(data)
-      .catch(() => {
+      .catch((err) => {
         alert('작성 실패. 입력 형태를 맞춰주세요');
       });
-      if(res === undefined) {
+
+      if(res.error) {
         alert('작성 실패. 입력 형태를 맞춰주세요');
         return;
       }
       console.log(res);
+      alert('게시 요청 완료');
       return;
     }
     alert("게시글 정보를 모두 입력하세요");
@@ -70,35 +83,27 @@ const WriteScreen = ({ route, navigation }) => {
         style={styles.textInput}
         onChangeText={setLocationId}
       />
-      <TextInput
-        placeholder="날짜(0000-00-00)"
-        maxLength={10}
-        style={styles.textInput}
-        onChangeText={setReservationDate}
-      />
       <View style={{flexDirection: "row"}}>
       <Text style={styles.dateText}>날짜:  </Text>
-        <TextInput 
-          placeholder="0000" 
+        <TextInput
+          placeholder="0000"
           maxLength={4}
-          value={year}
           style={styles.numInput}
-          keyboardType="number-pad"
-          onChange={handleYear}
+          onChangeText={setYear}
         />
         <Text style={styles.dateText}> - </Text>
         <TextInput 
           placeholder="00" 
           maxLength={2}
           style={styles.numInput}
-          keyboardType="number-pad"
+          onChangeText={setMonth}
         />
         <Text style={styles.dateText}> - </Text>
         <TextInput
           placeholder="00" 
           maxLength={2}
           style={styles.numInput}
-          keyboardType="number-pad"
+          onChangeText={setDay}
         />
       </View>
       <TextInput
@@ -110,6 +115,10 @@ const WriteScreen = ({ route, navigation }) => {
         multiline={true}
       />
       <Button title="올리기" onPress={handleUpload} />
+      <Text style={{ marginLeft: 15 }}>
+        * 날짜 형태는 반드시 0000-00-00를 맞춰주셔야 합니다. {'\n'}
+        * 장소 ID는 장소 안내 페이지에서 확인하실 수 있습니다.
+      </Text>
     </View>
   );
 };

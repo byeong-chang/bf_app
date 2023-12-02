@@ -187,6 +187,7 @@ const MatchScreen = ({ route, navigation }) => {
       }
     }
   }
+  const date = data.reservationDate;
 
   return (
     <View style={{flex: 1}}>
@@ -198,7 +199,7 @@ const MatchScreen = ({ route, navigation }) => {
           <Text style={{ textAlign: "right", fontSize:20}}>{data.flag?'매칭 완료':'매칭 대기중'}</Text>
           <Text>요청자: {data.user.username}</Text>
           <Text>위치: {data.location.locationName}</Text>
-          <Text>예정일: {data.reservationDate}</Text>
+          <Text>예정일: {date[0]}년 {date[1]}월 {date[2]}일</Text>
           <Text style={{ margin: 5, height: 200, backgroundColor: "ivory" }}>
             {data.content}
           </Text>

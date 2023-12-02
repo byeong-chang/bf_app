@@ -45,7 +45,7 @@ const RecruitScreen = ({ route, navigation }) => {
         <Text style={{ textAlign: "right" }}>{props.flag?'매칭완료':'매칭대기'}</Text>
         <Text style={{ textAlign: "right" }}>요청자: {props.userId}</Text>
         <Text style={{ textAlign: "center" }}>
-          {props.location} / {props.date}
+          {props.location} / {props.date[0]}년{props.date[1]}월{props.date[2]}일
         </Text>
         <Button title='자세히보기' onPress={handlePostingDetail} />
       </View>

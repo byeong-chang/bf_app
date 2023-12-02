@@ -16,7 +16,7 @@ export default function SearchLocationScreen({ route, navigation }) {
   const user = route.params.user;
   const [hobby, setHobby] = useState(null);
   const [locationCategory, setLocationCategory] = useState(null);
-  const [locations, setLocations] = useState();
+  const [locations, setLocations] = useState([]);
   const hobbyData = [
     { key: "1", value: "영화/연극/공연" },
     { key: "2", value: "전시/기념관" },
