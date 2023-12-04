@@ -145,6 +145,9 @@ export default function LocationDetailScreen({ route, navigation }) {
           <Text>
             휠체어 대여 여부 : {location.wheelchairRental ? "가능" : "불가"}
           </Text>
+          <Text>
+            장소 ID : {location.id}
+          </Text>
         </View>
         {location.homepage == "정보없음" ? (
           <Button title={location.homepage} />
